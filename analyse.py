@@ -47,3 +47,30 @@ def special(pwd, score):
         print(f"Special Characters: {count}")
         score += 1
     print(f"Password Score: {score}/5")
+        if score < 5:
+        option = input(
+            "Would you like some tips on how to create a stronger password (y/n)?\n"
+        )
+        option = option.lower()
+        if option == 'y':
+            tips(pwd)
+        else:
+            exit()
+
+
+def tips(pwd):
+    if len(pwd) < 12:
+        print("Making your password at least 12 characters long would be more secure.")
+
+    capnum = sum(1 for c in pwd if c.isupper())
+    if capnum == 0:
+        print("Using at least one capital letter would make your password more secure.")
+
+    num = sum((1 for n in pwd if n.isdigit()))
+    if num == 0:
+        print("Using at least one number would make your password more secure.")
+
+    char = re.compile("[@_!#$%^&*()<>?/\|}{~:]")
+    count = sum(1 for c in pwd if char.search(c))
+    if count == 0:
+        print("Using at least one special character would make your password more secure.")
